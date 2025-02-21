@@ -2,6 +2,8 @@
 
 - Clonar en repositorio:
     git clone https://github.com/CristianAlvarez-b/AREP-Parcial1.git
+- Entrar al directorio:
+   cd AREP-Parcial1/
 - Ejecutar el comando:
     mvn clean install
 - Iniciar el servidor con el comando:
