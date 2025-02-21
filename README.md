@@ -6,7 +6,6 @@
     mvn clean install
 - Iniciar el servidor con el comando:
   java -cp "target/classes" co.edu.escuelaing.arep.parcial.HttpServer
-- 
 ### Pruebas de Funcionamiento
 Para poder ingresar al cliente se debe digitar la url
 http://localhost:35000/index.html
