@@ -191,6 +191,7 @@ public class HttpServer {
 
     private static String getContentType(String fileRequested) {
         if (fileRequested.endsWith(".html")) return "text/html";
+        if(fileRequested.endsWith(".png")) return  "img/png";
         return "text/plain";
     }
 
