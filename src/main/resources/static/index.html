@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Calculadora con 1 o 2 Parametros</h1>
+<form action="/hellopost">
+    <label for="postname">Name:</label><br>
+    <input type="text" id="postname" name="name" value="John"><br><br>
+    <input type="button" value="Submit" onclick="loadPostMsg(postname)">
+</form>
+
+<div id="postrespmsg"></div>
+
+<script>
+    function loadPostMsg(name){
+        let url = "/";
+        const prueba = name.value;
+        fetch (url, {method: 'POST', content: "text/plain", body: prueba})
+            .then(x => x.text())
+            .then(y => document.getElementById("postrespmsg").innerHTML = y);
+    }
+</script>
+</body>
+</html>
