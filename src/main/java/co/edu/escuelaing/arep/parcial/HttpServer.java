@@ -4,7 +4,9 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class HttpServer {
     private static final int PORT = 35000;
@@ -69,22 +71,44 @@ public class HttpServer {
                     String numberPart = expression.substring(start + 1, end);
                     String[] values = numberPart.split(",");
                     numbers = Arrays.stream(values).mapToDouble(Double::parseDouble).toArray();
-                    Double result = ReflexCalculator.calculate(operation, numbers);
-                    String response;
-                    if(result != null){
-                        response = "{\"answer\": " + result + "}";
-                        out.println("HTTP/1.1 200 OK");
-                        out.println("Content-Type: application/json");
-                        out.println("Content-Length: "+response.length());
-                        out.println();
-                        out.println(response);
+                    if(operation.equals("bbl")){
+                        ArrayList<Double> result = BubbleSort.ordenar(numbers);
+
+                        String response;
+                        if(result != null){
+                            response = "{\"answer\": " + result + "}";
+                            out.println("HTTP/1.1 200 OK");
+                            out.println("Content-Type: application/json");
+                            out.println("Content-Length: "+response.length());
+                            out.println();
+                            out.println(response);
+                        }else{
+                            response = "{\"error\": \"Invalid Operation or Parameters\"}";
+                            out.println("HTTP/1.1 400 Bad Request");
+                            out.println("Content-Type: application/json");
+                            out.println("Content-Length: "+response.length());
+                            out.println();
+                            out.println(response);
+                        }
                     }else{
-                        response = "{\"error\": \"Invalid Operation or Parameters\"}";
-                        out.println("HTTP/1.1 400 Bad Request");
-                        out.println("Content-Type: application/json");
-                        out.println("Content-Length: "+response.length());
-                        out.println();
-                        out.println(response);
+
+                        Double result = ReflexCalculator.calculate(operation, numbers);
+                        String response;
+                        if(result != null){
+                            response = "{\"answer\": " + result + "}";
+                            out.println("HTTP/1.1 200 OK");
+                            out.println("Content-Type: application/json");
+                            out.println("Content-Length: "+response.length());
+                            out.println();
+                            out.println(response);
+                        }else{
+                            response = "{\"error\": \"Invalid Operation or Parameters\"}";
+                            out.println("HTTP/1.1 400 Bad Request");
+                            out.println("Content-Type: application/json");
+                            out.println("Content-Length: "+response.length());
+                            out.println();
+                            out.println(response);
+                        }
                     }
                 }else{
                     String response = "{\"error\": \"Invalid expression format\"}";

@@ -7,13 +7,24 @@
 </head>
 <body>
 <h1>Calculadora con 1 o 2 Parametros</h1>
-<form action="/hellopost">
-    <label for="postname">Name:</label><br>
-    <input type="text" id="postname" name="name" value="John"><br><br>
+<form>
+    <label for="postname">Funcion de Math:</label><br>
+    <input type="text" id="postname" name="name" placeholder="ceil(4.5)"><br><br>
     <input type="button" value="Submit" onclick="loadPostMsg(postname)">
 </form>
+<h1>Ordenamiento Burbuja</h1>
+<form>
+    <label for="burbuja">Lista:</label><br>
+    <input type="text" id="burbuja" name="name" placeholder="[1,3,2,5,7]"><br><br>
+    <input type="button" value="Submit" onclick="postBurbuja(burbuja)">
+</form>
+<div>
+    <h1>Resultado de la Calculadora</h1>
+    <div id="postrespmsg"></div>
+    <h1>Resultado del ordenamiento</h1>
+    <div id ="burbujamsg"></div>
+</div>
 
-<div id="postrespmsg"></div>
 
 <script>
     function loadPostMsg(name){
@@ -22,6 +33,13 @@
         fetch (url, {method: 'POST', content: "text/plain", body: prueba})
             .then(x => x.text())
             .then(y => document.getElementById("postrespmsg").innerHTML = y);
+    }
+    function postBurbuja(lista){
+        let url = "/";
+        const prueba = lista.value;
+        fetch (url, {method: 'POST', content: "text/plain", body: prueba})
+            .then(x => x.text())
+            .then(y => document.getElementById("burbujamsg").innerHTML = y); 
     }
 </script>
 </body>
